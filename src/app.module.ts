@@ -1,11 +1,9 @@
 import { McpApp, Module, ConfigModule } from '@nitrostack/core';
-import { PizzazModule } from './modules/pizzaz/pizzaz.module.js';
-
+import { CoverageModule } from './modules/coverage/coverage.module.js';
 /**
- * Root Application Module
- * 
- * Pizza shop finder with interactive maps.
- * Showcases NitroStack Widget SDK features.
+ * Policy Red-Flag & Coverage Agent.
+  Reads a user's insurance policy and gives concrete numeric answers
+  about coverage, red flags, and next steps.
  */
 @McpApp({
     module: AppModule,
@@ -22,7 +20,7 @@ import { PizzazModule } from './modules/pizzaz/pizzaz.module.js';
     description: 'Pizza shop finder with interactive maps',
     imports: [
         ConfigModule.forRoot(),
-        PizzazModule
+        CoverageModule
     ],
 })
 export class AppModule { }
