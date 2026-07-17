@@ -30,7 +30,10 @@ export const GlossaryEntrySchema = z.object({
 });
 
 export const AnalyzePolicyInputSchema = z.object({
-  policyId: z.string().describe('Identifier for the uploaded/selected policy document'),
+  policyId: z.string().describe('A label for this policy analysis session'),
+  file_name: z.string().describe('Original filename, e.g. "policy.pdf"'),
+  file_type: z.string().describe('MIME type, e.g. "application/pdf"'),
+  file_content: z.string().describe('Base64-encoded file content'),
 });
 
 export const AnalyzePolicyOutputSchema = z.object({
