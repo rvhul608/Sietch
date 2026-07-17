@@ -98,13 +98,60 @@ export const FindNetworkHospitalOutputSchema = z.object({
    Depends on AnalyzePolicyOutputSchema.redFlags
    ============================================================ */
 
-export const GenerateComplaintInputSchema = z.object({
-  policyId: z.string(),
-  redFlagIds: z.array(z.string()).describe('Which flagged issues to include in the letter'),
-  userName: z.string(),
+/* ============================================================
+   TOOL 4 — audit-bill   (owner: You)
+   ============================================================ */
+
+export const AuditBillInputSchema = z.object({
+  policyId: z.string().describe('Insurance policy identifier'),
+  hospitalName: z.string().describe('Hospital where treatment happened'),
+  totalBillAmount: z.number().describe('Total hospital bill amount in rupees'),
+  treatment: z.string().describe('Treatment/procedure name'),
+  billItems: z.array(
+    z.object({
+      item: z.string(),
+      amount: z.number(),
+    })
+  ).describe('Individual bill items'),
 });
 
-export const GenerateComplaintOutputSchema = z.object({
-  letterText: z.string(),
-  relatedFlagIds: z.array(z.string()),
+
+export const AuditBillOutputSchema = z.object({
+  totalBill: z.number(),
+
+  estimatedInsuranceCoverage: z.number()
+    .describe('Estimated amount covered by insurance'),
+
+  estimatedOutOfPocket: z.number()
+    .describe('Estimated amount user has to pay'),
+
+  coveredItems: z.array(
+    z.object({
+      item: z.string(),
+      amount: z.number(),
+      covered: z.boolean(),
+      reason: z.string(),
+    })
+  ),
+
+  nonCoveredItems: z.array(
+    z.object({
+      item: z.string(),
+      amount: z.number(),
+      covered: z.boolean(),
+      reason: z.string(),
+    })
+  ),
+
+  possibleOvercharges: z.array(
+    z.object({
+      item: z.string(),
+      amount: z.number(),
+      covered: z.boolean(),
+      reason: z.string(),
+    })
+  ),
+
+  summary: z.string()
+    .describe('Plain-language explanation of bill audit result'),
 });

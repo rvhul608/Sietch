@@ -1,5 +1,8 @@
 import { McpApp, Module, ConfigModule } from '@nitrostack/core';
+
 import { CoverageModule } from './modules/coverage/coverage.module.js';
+import { BillAuditorModule } from './modules/bill-auditor/bill-auditor.module.js';
+
 /**
  * Root Application Module
  *
@@ -22,7 +25,8 @@ import { CoverageModule } from './modules/coverage/coverage.module.js';
     description: 'Policy Red-Flag & Coverage Agent — insurance coverage, red flags, and next steps',
     imports: [
         ConfigModule.forRoot(),
-        CoverageModule
+        CoverageModule,
+        BillAuditorModule
     ],
 })
 export class AppModule { }

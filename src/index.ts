@@ -9,7 +9,7 @@
  * - useMaxHeight() for responsive layouts
  * - useWidgetSDK() for tool calling and navigation
  */
-
+import 'reflect-metadata';
 import 'dotenv/config';
 import { McpApplicationFactory } from '@nitrostack/core';
 import { AppModule } from './app.module.js';
