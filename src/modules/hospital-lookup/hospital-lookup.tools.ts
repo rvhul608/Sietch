@@ -27,6 +27,8 @@ const OutputSchema = z.array(
         phone: z.string().optional(),
         cashless: z.boolean(),
         insuranceProviders: z.array(z.string()),
+        lat: z.number().optional(),
+        lng: z.number().optional(),
     })
 );
 
