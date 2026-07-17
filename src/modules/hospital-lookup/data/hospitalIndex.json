@@ -1,0 +1,192 @@
+[
+    {
+        "hospital_name": "Gautham Hospital",
+        "address": "Panayappilly",
+        "city": "Ernakulam",
+        "state": "Kerala",
+        "pincode": "682005",
+        "lat": 9.9463,
+        "lng": 76.2588,
+        "insurers_covered": [
+            "Star Health",
+            "HDFC Ergo",
+            "Care Health"
+        ],
+        "bill_data": {
+            "bill_id": "INV-GH-10928",
+            "date": "2026-07-15",
+            "patient_id": "P-9831",
+            "total_amount": 28500,
+            "line_items": [
+                {
+                    "description": "ICU Room Charges (2 Days)",
+                    "amount": 10000
+                },
+                {
+                    "description": "Consultation Fee - Cardiology",
+                    "amount": 2500
+                },
+                {
+                    "description": "Pharmacy - Medicines",
+                    "amount": 7500
+                },
+                {
+                    "description": "Lab Tests & Diagnostics",
+                    "amount": 8500
+                }
+            ]
+        }
+    },
+    {
+        "hospital_name": "Kerala Institute of Medical Sciences (KIMS)",
+        "address": "Kumarapuram Poonthi Rd, Anamukham, P.B.No.1",
+        "city": "Trivandrum",
+        "state": "Kerala",
+        "pincode": "695029",
+        "lat": 8.5135,
+        "lng": 76.9142,
+        "insurers_covered": [
+            "Star Health",
+            "Max Bupa",
+            "ICICI Lombard",
+            "HDFC Ergo"
+        ],
+        "bill_data": {
+            "bill_id": "INV-KIMS-5501",
+            "date": "2026-07-10",
+            "patient_id": "P-3342",
+            "total_amount": 42000,
+            "line_items": [
+                {
+                    "description": "Private Room (3 Days)",
+                    "amount": 12000
+                },
+                {
+                    "description": "Surgical Procedure",
+                    "amount": 20000
+                },
+                {
+                    "description": "Anesthesia",
+                    "amount": 5000
+                },
+                {
+                    "description": "Post-Op Pharmacy",
+                    "amount": 5000
+                }
+            ]
+        }
+    },
+    {
+        "hospital_name": "Orchid KPM Hospital",
+        "address": "Down Hill, Near Passport Office, Parappanangadi Road",
+        "city": "Malappuram",
+        "state": "Kerala",
+        "pincode": "676519",
+        "lat": 11.0421,
+        "lng": 76.0792,
+        "insurers_covered": [
+            "HDFC Ergo",
+            "SBI General",
+            "New India Assurance"
+        ],
+        "bill_data": {
+            "bill_id": "INV-ORC-991",
+            "date": "2026-06-25",
+            "patient_id": "P-1120",
+            "total_amount": 14500,
+            "line_items": [
+                {
+                    "description": "General Ward (2 Days)",
+                    "amount": 4000
+                },
+                {
+                    "description": "Physician Consultation",
+                    "amount": 1000
+                },
+                {
+                    "description": "IV Fluids & Consumables",
+                    "amount": 4500
+                },
+                {
+                    "description": "Blood Tests",
+                    "amount": 5000
+                }
+            ]
+        }
+    },
+    {
+        "hospital_name": "Mercy Nursing Home (Pvt) Ltd",
+        "address": "Opposite Bus Stand, Karukachal",
+        "city": "Kottayam",
+        "state": "Kerala",
+        "pincode": "686540",
+        "lat": 9.4988,
+        "lng": 76.6543,
+        "insurers_covered": [
+            "Star Health",
+            "Care Health"
+        ],
+        "bill_data": {
+            "bill_id": "INV-MNH-8823",
+            "date": "2026-07-02",
+            "patient_id": "P-765",
+            "total_amount": 9200,
+            "line_items": [
+                {
+                    "description": "Semi-Private Room (1 Day)",
+                    "amount": 2500
+                },
+                {
+                    "description": "Pediatrician Consultation",
+                    "amount": 800
+                },
+                {
+                    "description": "Pharmacy",
+                    "amount": 3400
+                },
+                {
+                    "description": "Vaccination/Injection",
+                    "amount": 2500
+                }
+            ]
+        }
+    },
+    {
+        "hospital_name": "Sai Hospital",
+        "address": "Olavakode",
+        "city": "Palakkad",
+        "state": "Kerala",
+        "pincode": "678002",
+        "lat": 10.7935,
+        "lng": 76.6433,
+        "insurers_covered": [
+            "ICICI Lombard",
+            "HDFC Ergo",
+            "Care Health"
+        ],
+        "bill_data": {
+            "bill_id": "INV-SAI-3304",
+            "date": "2026-07-16",
+            "patient_id": "P-4599",
+            "total_amount": 18000,
+            "line_items": [
+                {
+                    "description": "Orthopedic Consultation",
+                    "amount": 1500
+                },
+                {
+                    "description": "X-Ray & MRI Scans",
+                    "amount": 9000
+                },
+                {
+                    "description": "Casting & Physiotherapy",
+                    "amount": 4500
+                },
+                {
+                    "description": "Pain Management Meds",
+                    "amount": 3000
+                }
+            ]
+        }
+    }
+]
