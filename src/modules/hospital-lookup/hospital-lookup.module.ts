@@ -1,7 +1,7 @@
 import { Module } from "@nitrostack/core";
 
-import { HospitalLookupService } from "./hospital-lookup.service";
-import { HospitalLookupTools } from "./hospital-lookup.tools";
+import { HospitalLookupService } from "./hospital-lookup.service.js";
+import { HospitalLookupTools } from "./hospital-lookup.tools.js";
 
 @Module({
     name: "hospital-lookup",

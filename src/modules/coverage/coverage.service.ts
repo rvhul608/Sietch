@@ -11,7 +11,7 @@
  * persistent storage yet" constraint.
  */
 
-import { COVERAGE_RULES, DEFAULT_COVERAGE_RULE, CoverageRule } from './coverage.data';
+import { COVERAGE_RULES, DEFAULT_COVERAGE_RULE, CoverageRule } from './coverage.data.js';
 // TODO: import { CoverageCheckInput, CoverageCheckOutput } from '../../shared/schemas';
 //       once these are added to the locked contract — see note at bottom of coverage.tools.ts.
 //       Using local types for now so this compiles standalone.

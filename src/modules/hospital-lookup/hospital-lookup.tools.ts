@@ -7,7 +7,7 @@ import {
 
 import {
     HospitalLookupService,
-} from "./hospital-lookup.service";
+} from "./hospital-lookup.service.js";
 
 const InputSchema = z.object({
     insurer: z.string().describe("Insurance company name"),

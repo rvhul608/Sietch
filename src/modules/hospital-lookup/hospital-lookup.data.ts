@@ -1,5 +1,11 @@
-import hospitalRecords from "./data/hospitalIndex.json";
+import { readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const hospitalRecords = JSON.parse(
+    readFileSync(join(__dirname, "data", "hospitalIndex.json"), "utf-8")
+);
 export interface Hospital {
     id: string;
     name: string;

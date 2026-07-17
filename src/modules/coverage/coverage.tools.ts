@@ -1,6 +1,6 @@
 import { ToolDecorator as Tool, Injectable, z, ExecutionContext } from '@nitrostack/core';
 
-import { CoverageService, CoverageCheckOutput } from './coverage.service';
+import { CoverageService, CoverageCheckOutput } from './coverage.service.js';
 
 const CoverageCheckInputSchema = z.object({
   policyId: z.string().describe('Policy identifier'),

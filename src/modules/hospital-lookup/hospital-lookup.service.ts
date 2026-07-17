@@ -1,4 +1,4 @@
-import { HOSPITALS, Hospital } from "./hospital-lookup.data";
+import { HOSPITALS, Hospital } from "./hospital-lookup.data.js";
 
 export interface HospitalLookupInput {
     insurer: string;
