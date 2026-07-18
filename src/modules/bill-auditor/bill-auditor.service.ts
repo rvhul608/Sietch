@@ -38,12 +38,118 @@ function median(values: number[]): number {
     : sorted[mid];
 }
 
+interface ExtractedBill {
+  hospitalName: string;
+  treatment: string;
+  totalBillAmount: number;
+  billItems: Array<{ item: string; amount: number }>;
+}
+
 @Injectable()
 export class BillAuditorService {
+  /**
+   * Uses Groq's vision model to extract structured bill data from a
+   * base64-encoded image or PDF of a hospital bill.
+   */
+  private async extractBillFromImage(
+    fileContent: string,
+    fileType: string
+  ): Promise<ExtractedBill> {
+    const baseUrl = process.env.GROQ_BASE_URL ?? "https://api.groq.com/openai/v1";
+    const apiKey = process.env.GROQ_API_KEY;
+
+    if (!apiKey) {
+      throw new Error(
+        "GROQ_API_KEY is not set — cannot extract bill data from an uploaded file."
+      );
+    }
+
+    const res = await fetch(`${baseUrl}/chat/completions`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: "meta-llama/llama-4-scout-17b-16e-instruct",
+        messages: [
+          {
+            role: "user",
+            content: [
+              {
+                type: "text",
+                text: [
+                  "Extract structured data from this hospital bill.",
+                  "Respond ONLY with a JSON object in exactly this shape:",
+                  '{"hospitalName": string, "treatment": string, "totalBillAmount": number, "billItems": [{"item": string, "amount": number}]}',
+                  "Amounts are numbers in rupees (no currency symbols, no commas).",
+                  "Include every distinct line item you can read from the bill.",
+                ].join(" "),
+              },
+              {
+                type: "image_url",
+                image_url: {
+                  url: `data:${fileType};base64,${fileContent}`,
+                },
+              },
+            ],
+          },
+        ],
+        response_format: { type: "json_object" },
+      }),
+    });
+
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(`Groq vision extraction failed (${res.status}): ${errText}`);
+    }
+
+    const data = await (res.json()) as any;
+    const raw = data?.choices?.[0]?.message?.content;
+    if (!raw) {
+      throw new Error("Groq vision extraction returned no content.");
+    }
+
+    let parsed: ExtractedBill;
+    try {
+      parsed = JSON.parse(raw);
+    } catch {
+      throw new Error(
+        `Groq vision extraction returned invalid JSON: ${raw.slice(0, 200)}`
+      );
+    }
+
+    if (!Array.isArray(parsed.billItems)) {
+      throw new Error("Extracted bill data is missing billItems.");
+    }
+
+    return parsed;
+  }
+
   async auditBill(
     input: typeof AuditBillInputSchema._type
   ): Promise<typeof AuditBillOutputSchema._type> {
-    const { billItems, totalBillAmount } = input;
+    let { billItems, totalBillAmount } = input;
+
+    // If no structured billItems were provided but a file was, extract
+    // the structured data from the file first.
+    if ((!billItems || billItems.length === 0) && input.file_content) {
+      const extracted = await this.extractBillFromImage(
+        input.file_content,
+        input.file_type ?? "image/jpeg"
+      );
+      billItems = extracted.billItems;
+      totalBillAmount = totalBillAmount ?? extracted.totalBillAmount;
+    }
+
+    if (!billItems || billItems.length === 0) {
+      throw new Error(
+        "No bill items available — provide billItems directly or a file_content to extract from."
+      );
+    }
+    if (totalBillAmount === undefined) {
+      throw new Error("totalBillAmount is required (or must be extractable from the uploaded file).");
+    }
 
     const coveredItems: Array<{
       item: string;

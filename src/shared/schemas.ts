@@ -107,17 +107,19 @@ export const FindNetworkHospitalOutputSchema = z.object({
 
 export const AuditBillInputSchema = z.object({
   policyId: z.string().describe('Insurance policy identifier'),
-  hospitalName: z.string().describe('Hospital where treatment happened'),
-  totalBillAmount: z.number().describe('Total hospital bill amount in rupees'),
-  treatment: z.string().describe('Treatment/procedure name'),
+  hospitalName: z.string().optional().describe('Hospital where treatment happened'),
+  totalBillAmount: z.number().optional().describe('Total hospital bill amount in rupees'),
+  treatment: z.string().optional().describe('Treatment/procedure name'),
   billItems: z.array(
-    z.object({
-      item: z.string(),
-      amount: z.number(),
-    })
-  ).describe('Individual bill items'),
-});
-
+    z.object({ item: z.string(), amount: z.number() })
+  ).optional().describe('Individual bill items'),
+  file_name: z.string().optional(),
+  file_type: z.string().optional(),
+  file_content: z.string().optional().describe('Base64-encoded bill image or PDF'),
+}).refine(
+  (data) => data.billItems?.length || data.file_content,
+  { message: 'Either billItems or file_content must be provided' }
+);
 
 export const AuditBillOutputSchema = z.object({
   totalBill: z.number(),
